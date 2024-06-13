@@ -1,14 +1,20 @@
-data class User(var name: String?, var phone: String?, var email: String?) {
+data class Person(var name: String?, var phoneBook: HashSet<String?>, var emailBook: HashSet<String?>) {
+    fun addPhone(phoneNum: String?){
+        phoneBook.add(phoneNum)
+    }
+    fun addEmail(emailAd: String?){
+        emailBook.add(emailAd)
+    }
 
+    fun getPB(): HashSet<String?>{
+        return HashSet(phoneBook)
+    }
+    fun getEB(): HashSet<String?>{
+        return HashSet(emailBook)
+    }
     override fun toString(): String {
         if(name != null){
-            if(phone != null){
-                return "Name: $name, Phone number: $phone"
-            }else if(email != null){
-                return "Name: $name, Email: $email"
-            }else{
-                return "Error in initialization"
-            }
+            return "Name: $name, \nPhone book: $phoneBook \nEmails: $emailBook"
         }else{
             return "Not initialized"
         }
