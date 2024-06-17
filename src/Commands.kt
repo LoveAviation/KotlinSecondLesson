@@ -2,12 +2,14 @@ sealed class Commands : Command {
     fun printInstruction(){
         println("List of commands:")
         println("help - shows this list")
+        println("instruction - show how to use the program")
         println("exit - stop the program")
         println("add <Name> phone <phoneNumber> - add a user with phone number(number need to start with '+'!)")
         println("add <Name> email <email> - add a user with email(email need to contain '@'!)")
         println("addPhone <PhoneNumber> - add a phone number to current")
         println("addEmail <Email> - add an email to current")
         println("save - save current user")
+        println("export - export all users in prepared JSON file")
         println("show - show current user")
         println("show <Name> - showing user by name")
         println("find <PhoneNumber/Email> - showing user by phone number or email")
@@ -32,11 +34,12 @@ sealed class Commands : Command {
         }
     }
 
-    class instruction():Commands(){
+    class instruction:Commands(){
         override fun run(){
             println("1) add user with command - add <Name> phone/email <Phone/Email>")
             println("2) you can add an extra phone number or email - addPhone/addEmail")
             println("3) save the user - save")
+            println("4) export user in JSON file - export")
             println("4) find this user by commands: find, show or sow everyone")
             println("*) use 'help' to see the list of commands")
             println("(write 'exit' to finish the program)")

@@ -1,5 +1,6 @@
 class ComReader {
     var saver = AllUsers(hashSetOf())
+    val dsl = DSL()
     var user = Person(null,  hashSetOf() , hashSetOf())
     fun readCommand(): Commands{
         print("Write command: ")
@@ -10,12 +11,28 @@ class ComReader {
             "show" -> return Commands.show(user)
             "instruction" -> return Commands.instruction()
             "save" -> {
-                saver.save(Person(user.name, user.getPB(), user.getEB()))
-                println("User is saved!")
+                if(user.name != null){
+                    saver.save(Person(user.name, user.getPB(), user.getEB()))
+                    println("User is saved!")
+                }else{
+                    println("Cant be saved")
+                }
                 return Commands.nothing()
             }
             "show everyone" -> {
-                saver.showAllUSers()
+                if(saver.users.size == 0){
+                    println("Nobody is in list!")
+                }else {
+                    saver.showAllUSers()
+                }
+                return Commands.nothing()
+            }
+            "export" -> {
+                if(saver.users.size == 0){
+                    println("Nobody is in list!")
+                }else {
+                    dsl.exportUsers(saver)
+                }
                 return Commands.nothing()
             }
         }
@@ -45,11 +62,17 @@ class ComReader {
         }else if(com?.trim()?.substringBefore( ' ') == "addPhone"){
             if(isValid(com.trim().substringAfter(' '))) {
                 user.addPhone(com.trim().substringAfter(' '))
+                println("Added phone for user - ${user.name}")
+            }else{
+                println("Something went wrong")
             }
             return Commands.nothing()
         }else if(com?.trim()?.substringBefore( ' ') == "addEmail"){
             if(isValid(com.trim().substringAfter(' '))) {
                 user.addEmail(com.trim().substringAfter(' '))
+                println("Added email for user - ${user.name}")
+            }else{
+                println("Something went wrong")
             }
             return Commands.nothing()
         }else if(com?.trim()?.substringBefore( ' ') == "show"){

@@ -14,7 +14,7 @@ data class Person(var name: String?, var phoneBook: HashSet<String?>, var emailB
     }
     override fun toString(): String {
         if(name != null){
-            return "Name: $name, \nPhone book: $phoneBook \nEmails: $emailBook"
+            return "Name: $name, \nPhone book: $phoneBook \nEmails: $emailBook\n"
         }else{
             return "Not initialized"
         }
